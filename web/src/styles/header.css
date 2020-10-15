@@ -1,0 +1,15 @@
+.header {
+  width: 100vw;
+  padding: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header h1 {
+  color: #5063f0;
+  font-size: 75px;
+  font-family: "Cabin", sans-serif;
+  font-weight: 700;
+}
