@@ -11,7 +11,7 @@ const Tools = () => {
 
   return (
     <div className="tools">
-      <Button click={handleModalClick} opened={true} />
+      <Button click={handleModalClick} opened={true} title="Cadastrar Imóvel" />
       <label htmlFor="filter">Ordenar por:</label>
       <select name="filter" id="filter">
         <option value="">Selecione uma opção</option>
