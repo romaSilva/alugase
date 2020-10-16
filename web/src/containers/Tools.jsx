@@ -16,7 +16,7 @@ const Tools = () => {
       <select name="filter" id="filter">
         <option value="">Selecione uma opção</option>
         <option value="city">Cidade</option>
-        <option value="value">Valor (R$)</option>
+        <option value="value">Estado</option>
       </select>
       <button className="order-button">
         <BsArrowUpDown size={32} />

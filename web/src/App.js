@@ -4,6 +4,7 @@ import Store from "./store/Store";
 import Header from "./components/Header";
 import Tools from "./containers/Tools";
 import Modal from "./components/Modal";
+import Table from "./components/Table";
 
 import "./styles/global.css";
 
@@ -13,6 +14,7 @@ function App() {
       <Header />
       <Tools />
       <Modal />
+      <Table />
     </Store>
   );
 }

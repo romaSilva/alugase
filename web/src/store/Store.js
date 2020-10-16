@@ -39,9 +39,9 @@ const Store = (props) => {
   };
 
   const handleFormSubmit = (data) => {
-    const { name, cpf, cep, address, city, state } = data;
+    const { name, cpf, cep, city, state } = data;
 
-    if (name && cpf && cep && city && state) {
+    if (name && cpf.length === 11 && cep.length === 8 && city && state) {
       console.log(data);
       dispatch({
         type: "SET_MODAL",
