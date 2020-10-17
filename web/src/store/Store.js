@@ -1,65 +1,59 @@
 import React, { useReducer } from "react";
+import GlobalContext from "./globalContext";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-import GlobalContext from "./globalContext";
 import reducer from "./reducer";
 
 const Store = (props) => {
-  const initialState = { modal: false, orderBy: "0", viaCepData: {} };
+  const initialState = { newData: {} };
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const handleModalClick = (opened) => {
-    console.log("Modal click...");
+  const history = useHistory();
 
-    dispatch({
-      type: "SET_MODAL",
-      payload: opened,
-    });
-  };
+  const handleFormSubmit = (formData) => {
+    const { cep } = formData;
 
-  const handleViaCepApi = (cep) => {
-    if (cep.toString().length === 8) {
-      axios.get(`https://viacep.com.br/ws/${cep}/json/`).then((res) => {
-        const { bairro, localidade, uf } = res.data;
+    axios
+      .get(`https://viacep.com.br/ws/${cep}/json/`)
+      .then((res) => {
+        if (res.data.erro !== true) {
+          const { bairro, localidade, uf } = res.data;
 
-        dispatch({
-          type: "SET_VIA_CEP_DATA",
-          payload: { address: bairro, city: localidade, state: uf },
-        });
+          const myData = {
+            ...formData,
+            address: bairro,
+            city: localidade,
+            state: uf,
+          };
+
+          dispatch({
+            type: "SET_DATA",
+            payload: { ...myData },
+          });
+
+          //POST
+          console.log(myData);
+
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    }
   };
 
-  const cleanViaCepData = () => {
-    dispatch({
-      type: "SET_VIA_CEP_DATA",
-      payload: {},
-    });
-  };
-
-  const handleFormSubmit = (data) => {
-    const { name, cpf, cep, city, state } = data;
-
-    if (name && cpf.length === 11 && cep.length === 8 && city && state) {
-      console.log(data);
-      dispatch({
-        type: "SET_MODAL",
-        payload: false,
-      });
-    }
+  const handleCitySearch = (search) => {
+    console.log(search);
   };
 
   return (
     <GlobalContext.Provider
       value={{
-        modal: state.modal,
-        orderBy: state.orderBy,
-        viaCepData: state.viaCepData,
-        handleModalClick,
-        handleViaCepApi,
-        cleanViaCepData,
+        newData: state.newData,
         handleFormSubmit,
+        handleCitySearch,
       }}
     >
       {props.children}
