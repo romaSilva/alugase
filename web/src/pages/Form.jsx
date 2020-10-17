@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import globalContext from "../store/globalContext";
 
 import Header from "../components/Header";
+import Dropzone from "../components/Dropzone";
 
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 import "../styles/pages/form.css";
@@ -11,6 +12,7 @@ const Form = () => {
   const { handleFormSubmit } = useContext(globalContext);
 
   //form state data
+  const [image, setImage] = useState();
   const [name, setName] = useState("");
   const [cpf, setCpf] = useState("");
   const [phone, setPhone] = useState("");
@@ -49,6 +51,7 @@ const Form = () => {
       details
     ) {
       const formData = {
+        image,
         name,
         cpf,
         phone,
@@ -77,7 +80,7 @@ const Form = () => {
           </header>
 
           <fieldset className="image-upload">
-            <div></div>
+            <Dropzone setImage={setImage} />
           </fieldset>
 
           <fieldset className="name-field">

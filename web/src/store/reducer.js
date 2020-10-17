@@ -1,6 +1,6 @@
 export default (state, action) => {
   switch (action.type) {
-    case "SET_DATA":
+    case "SET_NEW_DATA":
       return {
         ...state,
         newData: action.payload,

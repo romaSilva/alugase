@@ -29,7 +29,7 @@ const Store = (props) => {
           };
 
           dispatch({
-            type: "SET_DATA",
+            type: "SET_NEW_DATA",
             payload: { ...myData },
           });
 

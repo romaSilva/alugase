@@ -46,9 +46,22 @@
 }
 
 .add-form .image-upload div {
-  height: 250px;
+  height: 300px;
   width: 500px;
-  border: 1px solid var(--grey);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  border: 1.5px dotted var(--grey);
+  outline: none;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.add-form .image-upload:hover {
+  cursor: pointer;
 }
 
 .add-form fieldset {
