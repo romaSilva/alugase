@@ -1,12 +1,14 @@
 const Owner = require("../models/Owner");
 const Realty = require("../models/Realty");
 const { Op } = require("sequelize");
+const { update } = require("../models/Owner");
+const { response } = require("express");
 
 module.exports = {
   async store(req, res) {
     try {
       const { cpf } = req.params;
-      const { cep, address, city, state, value, details } = req.body;
+      const { cep, phone, address, city, state, value, details } = req.body;
       const fileName = req.file.filename;
 
       const owner = await Owner.findByPk(cpf);
@@ -18,6 +20,7 @@ module.exports = {
       const realty = await Realty.create({
         cpf,
         cep,
+        phone,
         address,
         city,
         state,
@@ -96,6 +99,7 @@ module.exports = {
       const realty = await Realty.findOne({
         attributes: [
           "id",
+          "phone",
           "cep",
           "address",
           "city",
@@ -111,6 +115,35 @@ module.exports = {
       });
 
       return res.json(realty);
+    } catch (error) {
+      console.error(error.message);
+      return res.status(500).send("Server Error");
+    }
+  },
+
+  async update(req, res) {
+    try {
+      const { id } = req.params;
+      const { cep, phone, address, city, state, value, details } = req.body;
+
+      await Realty.update(
+        {
+          cep,
+          phone,
+          address,
+          city,
+          state,
+          value,
+          details,
+        },
+        {
+          where: {
+            id,
+          },
+        }
+      );
+
+      return res.status(201).res.send("Realty updated");
     } catch (error) {
       console.error(error.message);
       return res.status(500).send("Server Error");

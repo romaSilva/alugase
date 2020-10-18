@@ -5,6 +5,7 @@ class Realty extends Model {
     super.init(
       {
         cep: DataTypes.STRING,
+        phone: DataTypes.STRING,
         address: DataTypes.STRING,
         city: DataTypes.STRING,
         state: DataTypes.INTEGER,

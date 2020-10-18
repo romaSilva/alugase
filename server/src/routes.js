@@ -5,8 +5,6 @@ const multerConfig = require("./config/multer");
 const OwnersController = require("./controllers/OwnersController.js");
 const RealtiesController = require("./controllers/RealtiesController.js");
 
-//index, show, create, update, delete
-
 const routes = express.Router();
 const upload = multer(multerConfig);
 
@@ -16,10 +14,10 @@ routes.post(
   upload.single("image"),
   RealtiesController.store
 );
-
 routes.get("/realties", RealtiesController.index);
 routes.get("/realties-filtered", RealtiesController.show);
 routes.delete("/realties/:id", RealtiesController.delete);
 routes.get("/realties/:id/owners", RealtiesController.one);
+routes.put("/realties/:id", RealtiesController.update);
 
 module.exports = routes;

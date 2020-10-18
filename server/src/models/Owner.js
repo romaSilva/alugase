@@ -6,7 +6,6 @@ class Owner extends Model {
       {
         cpf: { primaryKey: true, type: DataTypes.STRING },
         name: DataTypes.STRING,
-        phone: DataTypes.INTEGER,
       },
       {
         sequelize,
