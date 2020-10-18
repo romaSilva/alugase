@@ -1,11 +1,16 @@
 const { Sequelize } = require("sequelize");
-const dbConfig = require("../config/database.ts");
+const dbConfig = require("../config/database.js");
 
-const User = require("../models/Owner");
+const Owner = require("../models/Owner");
+const Realty = require("../models/Realty");
 
 const connection = new Sequelize(dbConfig);
 
-User.init(connection);
+Owner.init(connection);
+Realty.init(connection);
+
+Owner.associate(connection.models);
+Realty.associate(connection.models);
 
 // const testConnection = async () => {
 //   try {

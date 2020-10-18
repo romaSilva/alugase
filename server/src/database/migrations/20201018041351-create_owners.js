@@ -3,7 +3,11 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable("owners", {
-      cpf: { type: Sequelize.STRING, primaryKey: true, allowNull: false },
+      cpf: {
+        type: Sequelize.STRING,
+        primaryKey: true,
+        allowNull: false,
+      },
       name: {
         type: Sequelize.STRING,
         allowNull: false,

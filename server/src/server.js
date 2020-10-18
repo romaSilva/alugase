@@ -1,7 +1,7 @@
-import express from "express";
-import cors from "cors";
-import routes from "./routes";
-import path from "path";
+const express = require("express");
+const path = require("path");
+const cors = require("cors");
+const routes = require("./routes");
 
 require("./database/connection");
 

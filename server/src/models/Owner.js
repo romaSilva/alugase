@@ -13,6 +13,9 @@ class Owner extends Model {
       }
     );
   }
+  static associate(models) {
+    this.hasMany(models.Realty, { foreignKey: "cpf", as: "realties" });
+  }
 }
 
 module.exports = Owner;
