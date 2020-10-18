@@ -10,6 +10,7 @@ class Realty extends Model {
         state: DataTypes.INTEGER,
         value: DataTypes.DECIMAL,
         details: DataTypes.STRING,
+        image: DataTypes.STRING,
       },
       {
         sequelize,

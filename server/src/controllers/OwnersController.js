@@ -1,17 +1,20 @@
 const Owner = require("../models/Owner");
 
 module.exports = {
-  async index(req, res) {
-    const owners = await Owner.findAll();
-
-    return res.json(owners);
-  },
-
   async store(req, res) {
-    const { cpf, name, phone } = req.body;
+    try {
+      const { cpf, name, phone } = req.body;
 
-    const owner = await Owner.create({ cpf, name, phone });
+      const exists = await Owner.findByPk(cpf);
+      if (exists) {
+        return res.status(200).json({ message: "CPF already exists" });
+      }
 
-    return res.json(owner);
+      const owner = await Owner.create({ cpf, name, phone });
+      return res.status(201).json(owner);
+    } catch (error) {
+      console.error(error.message);
+      return res.status(500).send("Server error");
+    }
   },
 };

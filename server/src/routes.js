@@ -10,11 +10,16 @@ const RealtiesController = require("./controllers/RealtiesController.js");
 const routes = express.Router();
 const upload = multer(multerConfig);
 
-// routes.post("/realties", upload.single("image"), ownersController.create);
-
 routes.post("/owners", OwnersController.store);
-routes.get("/owners", OwnersController.index);
+routes.post(
+  "/owners/:cpf/realties",
+  upload.single("image"),
+  RealtiesController.store
+);
 
-routes.post("/owners/:cpf/realties", RealtiesController.store);
+routes.get("/realties", RealtiesController.index);
+routes.get("/realties-filtered", RealtiesController.show);
+routes.delete("/realties/:id", RealtiesController.delete);
+routes.get("/realties/:id/owners", RealtiesController.one);
 
 module.exports = routes;
