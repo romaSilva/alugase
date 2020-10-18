@@ -12,6 +12,7 @@ const Store = (props) => {
 
   const history = useHistory();
 
+  //POST NEW REALTY
   const handleFormSubmit = (formData) => {
     const { cep } = formData;
 
@@ -44,6 +45,7 @@ const Store = (props) => {
       });
   };
 
+  //GET FILTERED REALTIES
   const handleCitySearch = (search) => {
     console.log(search);
   };

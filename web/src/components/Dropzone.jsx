@@ -1,5 +1,4 @@
-import React, { useCallback, useState, useContext } from "react";
-import globalContext from "../store/globalContext";
+import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 import { FiUpload } from "react-icons/fi";
@@ -8,14 +7,12 @@ import "../styles/components/dropzone.css";
 const Dropzone = ({ setImage }) => {
   const [selectedFileUrl, setSelectedFileUrl] = useState("");
 
-  const { handleFileSubmit } = useContext(globalContext);
-
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
     const fileUrl = URL.createObjectURL(file);
     setSelectedFileUrl(fileUrl);
 
-    setImage(file);
+    setImage(file); // eslint-disable-next-line
   }, []);
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
