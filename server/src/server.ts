@@ -3,6 +3,8 @@ import cors from "cors";
 import routes from "./routes";
 import path from "path";
 
+require("./database/connection");
+
 const app = express();
 
 app.use(cors());

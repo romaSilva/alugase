@@ -13,6 +13,8 @@ const upload = multer(multerConfig);
 const ownersController = new OwnersController();
 const realtiesController = new RealtiesController();
 
-routes.post("/realties", upload.single("image"), ownersController.create);
+// routes.post("/realties", upload.single("image"), ownersController.create);
+
+routes.post("/owners", ownersController.create);
 
 export default routes;
