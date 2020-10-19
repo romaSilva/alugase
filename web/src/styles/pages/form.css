@@ -10,7 +10,7 @@
   justify-content: center;
 
   color: var(--main);
-  background-color: #fff;
+  background-color: var(--off-white);
   font-size: 30px;
   font-weight: 500;
 

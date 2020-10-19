@@ -39,7 +39,7 @@ module.exports = {
   async index(req, res) {
     try {
       const realties = await Realty.findAll({
-        attributes: ["id", "address", "city", "state", "value"],
+        attributes: ["id", "address", "city", "state", "value", "image", "cep"],
       });
 
       return res.status(200).json(realties);
@@ -54,7 +54,7 @@ module.exports = {
       const { search } = req.query;
 
       const realties = await Realty.findAll({
-        attributes: ["id", "address", "city", "state", "value"],
+        attributes: ["id", "address", "city", "state", "value", "image", "cep"],
         where: {
           city: {
             [Op.like]: `%${search}%`,

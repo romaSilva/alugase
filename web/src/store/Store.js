@@ -6,11 +6,49 @@ import axios from "axios";
 import reducer from "./reducer";
 
 const Store = (props) => {
-  const initialState = { newData: {} };
+  const initialState = {
+    appMgmt: { loading: false, currentCard: 0, totalCards: 0, cardsPerPage: 9 },
+    allRealties: "",
+    newData: {},
+  };
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const history = useHistory();
+
+  const handlePagination = (direction) => {
+    if (direction > 0) {
+      dispatch({
+        type: "SET_APP_MGMT",
+        payload: {
+          ...state.appMgmt,
+          currentCard: state.appMgmt.currentCard + state.appMgmt.cardsPerPage,
+        },
+      });
+    } else {
+      dispatch({
+        type: "SET_APP_MGMT",
+        payload: {
+          ...state.appMgmt,
+          currentCard: state.appMgmt.currentCard - state.appMgmt.cardsPerPage,
+        },
+      });
+    }
+  };
+
+  //gets all realties and updates the state
+  const getAllRealties = () => {
+    axios.get("http://localhost:3333/realties").then((res) => {
+      dispatch({
+        type: "SET_ALL_REALTIES",
+        payload: res.data,
+      });
+      dispatch({
+        type: "SET_APP_MGMT",
+        payload: { ...state.appMgmt, totalCards: res.data.length },
+      });
+    });
+  };
 
   //POST NEW REALTY
   const handleFormSubmit = (formData) => {
@@ -53,7 +91,11 @@ const Store = (props) => {
   return (
     <GlobalContext.Provider
       value={{
+        appMgmt: state.appMgmt,
+        allRealties: state.allRealties,
         newData: state.newData,
+        handlePagination,
+        getAllRealties,
         handleFormSubmit,
         handleCitySearch,
       }}

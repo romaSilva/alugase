@@ -1,5 +1,15 @@
 export default (state, action) => {
   switch (action.type) {
+    case "SET_APP_MGMT":
+      return {
+        ...state,
+        appMgmt: action.payload,
+      };
+    case "SET_ALL_REALTIES":
+      return {
+        ...state,
+        allRealties: action.payload,
+      };
     case "SET_NEW_DATA":
       return {
         ...state,
