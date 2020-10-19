@@ -11,7 +11,7 @@ const Store = (props) => {
     allRealties: [],
     filteredRealties: "",
     filter: "",
-    newData: {},
+    selectedRealty: {},
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -133,6 +133,47 @@ const Store = (props) => {
     }
   };
 
+  const handleCardClick = async (realty) => {
+    const { id } = realty;
+
+    const res = await axios.get(`http://localhost:3333/realties/${id}/owners`);
+
+    dispatch({
+      type: "SET_SELECTED_REALTY",
+      payload: res.data,
+    });
+  };
+
+  const handleUpdateFormSubmit = async (updateData) => {
+    const { id, phone, cep, value, details } = updateData;
+
+    const res = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+
+    if (res.data.erro !== true) {
+      const { bairro, localidade, uf } = res.data;
+
+      const realtyData = {
+        cep,
+        phone,
+        value,
+        details,
+        address: bairro,
+        city: localidade,
+        state: uf,
+      };
+
+      await axios.put(`http://localhost:3333/realties/${id}`, realtyData);
+
+      history.push("/");
+    }
+  };
+
+  const handleDelete = async (id) => {
+    await axios.delete(`http://localhost:3333/realties/${id}`);
+
+    history.push("/");
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -140,11 +181,14 @@ const Store = (props) => {
         allRealties: state.allRealties,
         filteredRealties: state.filteredRealties,
         filter: state.filter,
-        newData: state.newData,
+        selectedRealty: state.selectedRealty,
         handlePagination,
         getAllRealties,
         handleFormSubmit,
         handleCitySearch,
+        handleCardClick,
+        handleUpdateFormSubmit,
+        handleDelete,
       }}
     >
       {props.children}

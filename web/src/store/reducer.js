@@ -20,10 +20,10 @@ export default (state, action) => {
         ...state,
         filter: action.payload,
       };
-    case "SET_NEW_DATA":
+    case "SET_SELECTED_REALTY":
       return {
         ...state,
-        newData: action.payload,
+        selectedRealty: action.payload,
       };
     default:
       return state;
