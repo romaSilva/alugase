@@ -7,8 +7,10 @@ import reducer from "./reducer";
 
 const Store = (props) => {
   const initialState = {
-    appMgmt: { loading: false, currentCard: 0, totalCards: 0, cardsPerPage: 9 },
-    allRealties: "",
+    appMgmt: { currentCard: 0, totalCards: 0, cardsPerPage: 9 },
+    allRealties: [],
+    filteredRealties: "",
+    filter: "",
     newData: {},
   };
 
@@ -36,8 +38,9 @@ const Store = (props) => {
     }
   };
 
-  //gets all realties and updates the state
+  //GET ALL REALTIES
   const getAllRealties = () => {
+    console.log("Hello Barabra");
     axios.get("http://localhost:3333/realties").then((res) => {
       dispatch({
         type: "SET_ALL_REALTIES",
@@ -45,7 +48,10 @@ const Store = (props) => {
       });
       dispatch({
         type: "SET_APP_MGMT",
-        payload: { ...state.appMgmt, totalCards: res.data.length },
+        payload: {
+          ...state.appMgmt,
+          totalCards: res.data.length,
+        },
       });
     });
   };
@@ -85,7 +91,39 @@ const Store = (props) => {
 
   //GET FILTERED REALTIES
   const handleCitySearch = (search) => {
-    console.log(search);
+    dispatch({
+      type: "SET_FILTER",
+      payload: search,
+    });
+    if (search.length === 0) {
+      dispatch({
+        type: "SET_FILTERED_REALTIES",
+        payload: "",
+      });
+      dispatch({
+        type: "SET_APP_MGMT",
+        payload: {
+          ...state.appMgmt,
+          totalCards: state.allRealties.length,
+        },
+      });
+    } else {
+      axios
+        .get(`http://localhost:3333/realties-filtered?search=${search}`)
+        .then((res) => {
+          dispatch({
+            type: "SET_APP_MGMT",
+            payload: {
+              ...state.appMgmt,
+              totalCards: res.data.length,
+            },
+          });
+          dispatch({
+            type: "SET_FILTERED_REALTIES",
+            payload: res.data,
+          });
+        });
+    }
   };
 
   return (
@@ -93,6 +131,8 @@ const Store = (props) => {
       value={{
         appMgmt: state.appMgmt,
         allRealties: state.allRealties,
+        filteredRealties: state.filteredRealties,
+        filter: state.filter,
         newData: state.newData,
         handlePagination,
         getAllRealties,

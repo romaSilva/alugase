@@ -10,6 +10,16 @@ export default (state, action) => {
         ...state,
         allRealties: action.payload,
       };
+    case "SET_FILTERED_REALTIES":
+      return {
+        ...state,
+        filteredRealties: action.payload,
+      };
+    case "SET_FILTER":
+      return {
+        ...state,
+        filter: action.payload,
+      };
     case "SET_NEW_DATA":
       return {
         ...state,

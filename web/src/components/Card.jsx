@@ -11,7 +11,7 @@ const Card = ({ realty }) => {
       <div className="card-info-container">
         <span>CEP: {realty.cep}</span>
         <span>
-          {realty.city} {realty.state}
+          {realty.city} - {realty.state}
         </span>
         <span className="card-value">R$ {realty.value}</span>
       </div>

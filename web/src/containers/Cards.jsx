@@ -8,9 +8,15 @@ import Loading from "../components/Loading";
 import "../styles/containers/cards.css";
 
 const Cards = () => {
-  const { appMgmt, allRealties, handlePagination } = useContext(globalContext);
+  const {
+    appMgmt,
+    allRealties,
+    filteredRealties,
+    filter,
+    handlePagination,
+  } = useContext(globalContext);
 
-  if (!allRealties) return <Loading />;
+  if (allRealties.length === 0) return <Loading />;
 
   return (
     <div className="outer-container">
@@ -20,26 +26,37 @@ const Cards = () => {
             className="arrowBack"
             onClick={() => handlePagination(-1)}
             style={{
-              visibility: appMgmt.currentCard === 0 ? "hidden" : "visible",
+              visibility:
+                appMgmt.currentCard === 0 ||
+                (!filteredRealties.length && filter)
+                  ? "hidden"
+                  : "visible",
             }}
           >
             <IoIosArrowBack size={35} />
           </div>
 
-          {allRealties
-            .slice(
-              appMgmt.currentCard,
-              appMgmt.currentCard + appMgmt.cardsPerPage
-            )
-            .map((realty) => (
-              <Card key={realty.id} realty={realty} />
-            ))}
+          {filteredRealties
+            ? filteredRealties
+                .slice(
+                  appMgmt.currentCard,
+                  appMgmt.currentCard + appMgmt.cardsPerPage
+                )
+                .map((realty) => <Card key={realty.id} realty={realty} />)
+            : allRealties
+                .slice(
+                  appMgmt.currentCard,
+                  appMgmt.currentCard + appMgmt.cardsPerPage
+                )
+                .map((realty) => <Card key={realty.id} realty={realty} />)}
           <div
             className="arrowFoward"
             onClick={() => handlePagination(1)}
             style={{
               visibility:
-                appMgmt.currentCard >= appMgmt.totalCards - appMgmt.cardsPerPage
+                appMgmt.currentCard >=
+                  appMgmt.totalCards - appMgmt.cardsPerPage ||
+                (!filteredRealties.length && filter)
                   ? "hidden"
                   : "visible",
             }}
