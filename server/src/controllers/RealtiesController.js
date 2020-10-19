@@ -149,7 +149,7 @@ module.exports = {
         }
       );
 
-      return res.status(201).res.send("Realty updated");
+      return res.status(201).json({ message: "Realty updated" });
     } catch (error) {
       console.error(error.message);
       return res.status(500).send("Server Error");
