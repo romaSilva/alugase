@@ -9,7 +9,13 @@ module.exports = {
     try {
       const { cpf } = req.params;
       const { cep, phone, address, city, state, value, details } = req.body;
-      const fileName = req.file.filename;
+
+      let fileName;
+      if (req.file) {
+        fileName = req.file.filename;
+      } else {
+        fileName = "example.jpg";
+      }
 
       const owner = await Owner.findByPk(cpf);
 

@@ -11,7 +11,7 @@ const Home = () => {
   const { getAllRealties } = useContext(globalContext);
 
   useEffect(() => {
-    getAllRealties();
+    getAllRealties(); // eslint-disable-next-line
   }, []);
 
   return (

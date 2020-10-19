@@ -7,7 +7,7 @@ module.exports = {
 
       const exists = await Owner.findByPk(cpf);
       if (exists) {
-        return res.status(200).json({ message: "CPF already exists" });
+        return res.status(202).json({ message: "CPF already exists" });
       }
 
       const owner = await Owner.create({ cpf, name });

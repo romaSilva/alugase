@@ -39,67 +39,73 @@ const Store = (props) => {
   };
 
   //GET ALL REALTIES
-  const getAllRealties = () => {
-    console.log("Hello Barabra");
-    axios.get("http://localhost:3333/realties").then((res) => {
-      dispatch({
-        type: "SET_ALL_REALTIES",
-        payload: res.data,
-      });
-      dispatch({
-        type: "SET_APP_MGMT",
-        payload: {
-          ...state.appMgmt,
-          totalCards: res.data.length,
-        },
-      });
+  const getAllRealties = async () => {
+    const res = await axios.get("http://localhost:3333/realties");
+
+    dispatch({
+      type: "SET_ALL_REALTIES",
+      payload: res.data,
+    });
+
+    dispatch({
+      type: "SET_APP_MGMT",
+      payload: {
+        ...state.appMgmt,
+        totalCards: res.data.length,
+      },
     });
   };
 
   //POST NEW REALTY
-  const handleFormSubmit = (formData) => {
-    const { cep } = formData;
+  const handleFormSubmit = async (formData) => {
+    const { image, name, cpf, phone, cep, value, details } = formData;
 
-    axios
-      .get(`https://viacep.com.br/ws/${cep}/json/`)
-      .then((res) => {
-        if (res.data.erro !== true) {
-          const { bairro, localidade, uf } = res.data;
+    const res = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
 
-          const myData = {
-            ...formData,
-            address: bairro,
-            city: localidade,
-            state: uf,
-          };
+    if (res.data.erro !== true) {
+      const { bairro, localidade, uf } = res.data;
 
-          dispatch({
-            type: "SET_NEW_DATA",
-            payload: { ...myData },
-          });
+      const ownerData = {
+        name,
+        cpf,
+      };
 
-          //POST
-          console.log(myData);
+      await axios.post(`http://localhost:3333/owners`, ownerData);
 
-          history.push("/");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      const realtyData = new FormData();
+
+      realtyData.append("phone", phone);
+      realtyData.append("cep", cep);
+      realtyData.append("address", bairro);
+      realtyData.append("city", localidade);
+      realtyData.append("state", uf);
+      realtyData.append("value", value);
+      realtyData.append("details", details);
+
+      if (image) realtyData.append("image", image);
+
+      await axios.post(
+        `http://localhost:3333/owners/${cpf}/realties`,
+        realtyData
+      );
+
+      history.push("/");
+    }
   };
 
   //GET FILTERED REALTIES
-  const handleCitySearch = (search) => {
+  const handleCitySearch = async (search) => {
     dispatch({
       type: "SET_FILTER",
       payload: search,
     });
+
     if (search.length === 0) {
       dispatch({
         type: "SET_FILTERED_REALTIES",
         payload: "",
       });
+
       dispatch({
         type: "SET_APP_MGMT",
         payload: {
@@ -108,21 +114,22 @@ const Store = (props) => {
         },
       });
     } else {
-      axios
-        .get(`http://localhost:3333/realties-filtered?search=${search}`)
-        .then((res) => {
-          dispatch({
-            type: "SET_APP_MGMT",
-            payload: {
-              ...state.appMgmt,
-              totalCards: res.data.length,
-            },
-          });
-          dispatch({
-            type: "SET_FILTERED_REALTIES",
-            payload: res.data,
-          });
-        });
+      const res = await axios.get(
+        `http://localhost:3333/realties-filtered?search=${search}`
+      );
+
+      dispatch({
+        type: "SET_FILTERED_REALTIES",
+        payload: res.data,
+      });
+
+      dispatch({
+        type: "SET_APP_MGMT",
+        payload: {
+          ...state.appMgmt,
+          totalCards: res.data.length,
+        },
+      });
     }
   };
 
