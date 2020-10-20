@@ -133,6 +133,7 @@ const Store = (props) => {
     }
   };
 
+  //GET ONE REALTY
   const handleCardClick = async (realty) => {
     const { id } = realty;
 
@@ -144,6 +145,7 @@ const Store = (props) => {
     });
   };
 
+  //UPDATE REALTY
   const handleUpdateFormSubmit = async (updateData) => {
     const { id, phone, cep, value, details } = updateData;
 
@@ -168,6 +170,7 @@ const Store = (props) => {
     }
   };
 
+  //DELETE REALTY
   const handleDelete = async (id) => {
     await axios.delete(`http://localhost:3333/realties/${id}`);
 
