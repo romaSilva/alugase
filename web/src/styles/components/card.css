@@ -1,7 +1,6 @@
 .card-container {
   border: 1px solid var(--grey);
-  width: 250px;
-  height: 300px;
+  height: 280px;
   margin-bottom: 25px;
 
   border-radius: 8px;
