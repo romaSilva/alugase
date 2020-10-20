@@ -10,7 +10,7 @@ aluga-se</h1>
 
 
 <p align="center">
-  <img alt="Frontend" src=".github/home.JPG" width="80%">
+  <img alt="Frontend" src=".github/home.jpg" width="80%">
 </p>
 
 
