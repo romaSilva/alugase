@@ -1,20 +1,14 @@
 <h1 align="center">
 aluga-se</h1>
 
-<p align="center">
-  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-como-usar">Como Usar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-como-contribuir">Como contribuir</a>
-</p>
 
 
 <p align="center">
   <img alt="Frontend" src=".github/home.jpg" width="80%">
 </p>
 
-
-
+ 
+ 
 
 ##  Projeto
 
