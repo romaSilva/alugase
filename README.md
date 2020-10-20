@@ -8,15 +8,11 @@ aluga-se</h1>
   <a href="#-como-contribuir">Como contribuir</a>
 </p>
 
-<!-- <p align="center">
-  <img alt="Frontend" src=".github/vuttr_home.JPG" width="80%">
-</p>
+
 <p align="center">
-  <img alt="Frontend" src=".github/vuttr_add.JPG" width="80%">
+  <img alt="Frontend" src=".github/home.JPG" width="80%">
 </p>
-<p align="center">
-  <img alt="Frontend" src=".github/vuttr_rm.JPG" width="80%">
-</p> -->
+
 
 
 
@@ -24,7 +20,7 @@ aluga-se</h1>
 
 Desafio proposto pela [Pris](https://pris.com.br/). A idéia do projeto era desenvolver uma aplicação fullsatck no âmbito de locação de imóveis. Para isso, era necessário criar uma interface, com a qual o usuário fosse capaz de interagir e performar cadastros e alterações no banco de dados da aplicação.
 
-Uma demonstração do funcionamento do sistema desenvolvido pode ser vista no vídeo: 
+Uma demonstração do funcionamento do sistema desenvolvido pode ser vista no vídeo: [LINK](https://www.loom.com/share/32dad75f8c754e48a9f4bb60911a3e96)
 
 ##  Tecnologias
 
@@ -44,7 +40,7 @@ Tecnologias utilizadas:
 
 ### Back-end
 
-Para o back-end da aplicação utlizei o _framework_ Node.js para a execução de código JavaScript no lado do servidor. O banco de dados utilizado foi o Microsoft SQL Server. Foi empregue uma arquitetura de _models_ e _controllers_ para melhor desacoplamento das camadas. Os maiores desafios enfrentados foram:
+Para o back-end da aplicação utilizei o _framework_ Node.js para a execução de código JavaScript no lado do servidor. O banco de dados utilizado foi o Microsoft SQL Server e o _script_ resultante da cração das tabelas se encontra na pasta deste repositório. Foi empregue uma arquitetura de _models_ e _controllers_ para melhor desacoplamento das camadas. Os maiores desafios enfrentados foram:
 
 - Dificuldade em encontrar informações sobre o método ideal de conexão com o SQL Server. Após ler a documentação de diversas alternativas, optei por utlizar o ORM Sequelize.
 - Planejamento das diversas rotas a serem implementadas.

@@ -74,13 +74,14 @@ const Form = () => {
             <fieldset className="name-field">
               <label htmlFor="name">Nome do proprietário: </label>
               <input
+                className="green"
                 type="name"
                 id="name"
                 value={
                   (selectedRealty.owner && selectedRealty.owner.name) || " "
                 }
                 readOnly
-                className="green"
+                style={{ border: "1px solid green" }}
               />
             </fieldset>
 
@@ -94,6 +95,7 @@ const Form = () => {
                     (selectedRealty.owner && selectedRealty.owner.cpf) || " "
                   }
                   readOnly
+                  style={{ border: "1px solid green" }}
                 />
               </fieldset>
 

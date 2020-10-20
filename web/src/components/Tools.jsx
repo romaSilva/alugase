@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "../styles/components/tools.css";
 
 const Tools = () => {
-  const { handleCitySearch } = useContext(globalContext);
+  const { handleCitySearch, filter } = useContext(globalContext);
 
   const handleInputChange = (e) => {
     handleCitySearch(e.target.value);
@@ -23,6 +23,7 @@ const Tools = () => {
         id="city"
         placeholder="Busque por cidade"
         onChange={handleInputChange}
+        value={filter}
       />
     </div>
   );

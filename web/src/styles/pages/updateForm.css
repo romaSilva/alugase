@@ -167,8 +167,3 @@
   color: var(--pink-hover);
   border-color: var(--pink-hover);
 }
-
-#name,
-#cpf {
-  border: 1px solid green;
-}
