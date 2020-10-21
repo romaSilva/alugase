@@ -49,7 +49,7 @@ Tecnologias utilizadas:
 ### Front-end
 
 - É necessário ter o [Node.js](https://nodejs.org/en/) e [npm](https://www.npmjs.com/) instalados
-- Clone esse repositório: `git clone https://github.com/romaSilva/VUTTR-BossaBox.git`
+- Clone esse repositório: `git clone https://github.com/romaSilva/alugase.git`
 - Abra o terminal na pasta: `web`
 - Instale as dependências do projeto, digitando no terminal: `npm install`
 - Enfim, para rodar a aplicação digite: `npm start`
@@ -57,7 +57,7 @@ Tecnologias utilizadas:
 ### Back-end
 
 - É necessário ter o [Node.js](https://nodejs.org/en/) e [npm](https://www.npmjs.com/) instalados
-- Clone esse repositório: `git clone https://github.com/romaSilva/VUTTR-BossaBox.git`
+- Clone esse repositório: `git clone https://github.com/romaSilva/alugase.git`
 - Abra o terminal na pasta: `server`
 - Instale as dependências do projeto, digitando no terminal: `npm install`
 
