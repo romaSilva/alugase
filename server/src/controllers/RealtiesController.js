@@ -1,8 +1,6 @@
 const Owner = require("../models/Owner");
 const Realty = require("../models/Realty");
 const { Op } = require("sequelize");
-const { update } = require("../models/Owner");
-const { response } = require("express");
 
 module.exports = {
   async store(req, res) {
